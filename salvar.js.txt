@@ -1,0 +1,19 @@
+// salvar.js
+function gerarNomeArquivo() {
+  Excel.run(async function (context) {
+    const sheet = context.workbook.worksheets.getItem("Relatorio");
+    const cell = sheet.getRange("D5");
+    cell.load("values");
+
+    await context.sync();
+
+    const nomeCliente = cell.values[0][0] || "Relatorio";
+    const agora = new Date();
+    const nomeArquivo = `${nomeCliente}_${agora.getDate()}_${agora.getMonth() + 1}_${agora.getFullYear()}_${agora.getHours()}h${agora.getMinutes()}m${agora.getSeconds()}s.xlsx`;
+
+    alert("Sugestão de nome do arquivo:\n" + nomeArquivo);
+  }).catch(function (error) {
+    console.error("Erro ao gerar nome do arquivo:", error);
+    alert("Erro ao gerar nome do arquivo.");
+  });
+}

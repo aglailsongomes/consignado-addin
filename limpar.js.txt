@@ -1,0 +1,26 @@
+// limpar.js
+function limparDados() {
+  Excel.run(function (context) {
+    const relatorio = context.workbook.worksheets.getItem("Relatorio");
+    const eventos = context.workbook.worksheets.getItem("Eventos");
+    const festa = context.workbook.worksheets.getItem("Festa");
+
+    // Limpa dados da aba Relatorio
+    relatorio.getRange("D5:G5").clear();
+    relatorio.getRange("B8:E40").clear();
+    relatorio.getRange("I8:I40").clear();
+
+    // Limpa dados da aba Eventos
+    eventos.getRange("B8:F40").clear();
+
+    // Limpa dados da aba Festa
+    festa.getRange("B8:H40").clear();
+
+    return context.sync().then(function () {
+      alert("Dados limpos com sucesso!");
+    });
+  }).catch(function (error) {
+    console.error("Erro ao limpar dados:", error);
+    alert("Erro ao limpar dados.");
+  });
+}
